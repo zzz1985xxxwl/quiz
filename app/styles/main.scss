@@ -1,0 +1,65 @@
+@import 'compass/css3';
+$icon-font-path: "fonts/";
+@import 'bootstrap-sass-official/assets/stylesheets/bootstrap';
+/* ==========================================================================
+   Project styles
+   ========================================================================== */
+
+$gray:#636f70;
+$black:#272627;
+$orange:#E66F2D;
+$width:650px;
+body {
+    background-color: $orange;
+    color: #FFF;
+}
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.m-main {
+    margin-top: 50px;
+    width: $width;
+    .panel {
+        color: #333333;
+        min-height: 300px;
+    }
+    .item {
+        float: left;
+        width: -32+$width;
+        &>div {
+            margin-bottom: 20px;
+        }
+    }
+    #d0 {
+        margin-top: 50px;
+    }
+    textarea {
+        height: 120px;
+    }
+    .quiz-container {
+        overflow: hidden;
+    }
+    .quiz-wrap {
+        width: (-32+$width)*10;
+        @include transition-duration(0.15s);
+        @include transition-timing-function(ease-in);
+    }
+}
+.footer {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+}
+.alert {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+}
+.code {
+    background-color: #222222;
+    color: #ffffff;
+    padding: 10px;
+    @include border-radius(5px);
+}

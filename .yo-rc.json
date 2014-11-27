@@ -1,0 +1,10 @@
+{
+  "generator-web": {
+    "appName": "quiz",
+    "includeModernizr": true,
+    "includeUnderscore": false,
+    "includeFontAwesome": true,
+    "includeRespond": false,
+    "includeHtml5shiv": false
+  }
+}
