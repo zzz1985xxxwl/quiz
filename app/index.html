@@ -32,7 +32,12 @@
 
     <div class="container m-main">
         <div class="row">
-            <h1>Transfinder</h1>
+            <div class="col-md-10">
+                <h1>Transfinder</h1>
+            </div>
+            <div class="col-md-2">
+                <h1 id="quizTime" class="text-right">00:00</h1>
+            </div>
         </div>
         <div class="row">
             <div class="panel panel-default">
@@ -76,15 +81,16 @@
                                 <div>
                                     3. What this javascript doing?
                                     <div class="code">
-    <span style="color:#5BC0DE">function</span> addMethod(object, name, fn) {<br />
-    &nbsp; &nbsp;<span style="color:#5BC0DE">var</span> old = object[name];<br />
-    &nbsp; &nbsp;object[name] = <span style="color:#5BC0DE">function</span>(){<br />
-    &nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#5BC0DE">if</span> (fn.length == arguments.length)<br />
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#5BC0DE">return</span> fn.apply(this, arguments)<br />
-    &nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#5BC0DE">else if</span> (typeof old == &#39;function&#39;)<br />
-    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#5BC0DE">return</span> old.apply(this, arguments);<br />
-    &nbsp; &nbsp;};<br />
-    }</div>
+                                        <span style="color:#5BC0DE">function</span> addMethod(object, name, fn) {
+                                        <br /> &nbsp; &nbsp;<span style="color:#5BC0DE">var</span> old = object[name];
+                                        <br /> &nbsp; &nbsp;object[name] = <span style="color:#5BC0DE">function</span>(){
+                                        <br /> &nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#5BC0DE">if</span> (fn.length == arguments.length)
+                                        <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#5BC0DE">return</span> fn.apply(this, arguments)
+                                        <br /> &nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#5BC0DE">else if</span> (typeof old == &#39;function&#39;)
+                                        <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#5BC0DE">return</span> old.apply(this, arguments);
+                                        <br /> &nbsp; &nbsp;};
+                                        <br /> }
+                                    </div>
 
 
                                 </div>

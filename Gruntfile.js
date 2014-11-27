@@ -46,6 +46,7 @@ module.exports = function (grunt) {
             livereload: {
                 files: [
 					'Gruntfile.js',
+					'<%= yeoman.app %>/app/styles/*.scss',
                     '<%= yeoman.app %>/{,*/}*.html',
                     '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
                 	'{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
@@ -161,7 +162,7 @@ module.exports = function (grunt) {
 						flatten: true,
 						cwd: 'bower_components/',
 						dest: '<%= yeoman.dist %>/styles/fonts/',
-						src: ['bootstrap-sass-official/assets/fonts/bootstrap/*.*', 'font-awesome/fonts/*.*']
+						src: ['bootstrap-sass-official/assets/fonts/bootstrap/*.*']
 
 					},
 					{
@@ -259,7 +260,7 @@ module.exports = function (grunt) {
 	grunt.registerTask('serve', [
 		'clean:server',
 		'copy:server',
-		//'modernizr',
+		'modernizr',
 		'compass:server',
 		'jshint',
 		'connect:livereload',
