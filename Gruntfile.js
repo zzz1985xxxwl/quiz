@@ -2,28 +2,31 @@
 
 'use strict';
 var LIVERELOAD_PORT = 4000,
-	SERVER_PORT = 3000,
-	lrSnippet = require('connect-livereload')({ port: LIVERELOAD_PORT }),
-	mountFolder = function (connect, dir) {
-		return connect.static(require('path').resolve(dir));
-	};
+    SERVER_PORT = 3000,
+    lrSnippet = require('connect-livereload')({
+        port: LIVERELOAD_PORT
+    }),
+    proxySnippet = require('grunt-connect-proxy/lib/utils').proxyRequest,
+    mountFolder = function(connect, dir) {
+        return connect.static(require('path').resolve(dir));
+    };
 
-module.exports = function (grunt) {
-	// show elapsed time at the end
-	require('time-grunt')(grunt);
+module.exports = function(grunt) {
+    // show elapsed time at the end
+    require('time-grunt')(grunt);
 
-	// load all grunt tasks
-	require('load-grunt-tasks')(grunt);
+    // load all grunt tasks
+    require('load-grunt-tasks')(grunt);
 
-	var yeomanConfig = {
-		app: 'app',
-		dist: 'dist'
-	};
+    var yeomanConfig = {
+        app: 'app',
+        dist: 'dist'
+    };
 
     // Define the configuration for all the tasks
-	grunt.initConfig({
+    grunt.initConfig({
         // Project settings
-		yeoman: yeomanConfig,
+        yeoman: yeomanConfig,
 
         // Watches files for changes and runs tasks based on the changed files
         watch: {
@@ -31,66 +34,92 @@ module.exports = function (grunt) {
                 spawn: false,
                 livereload: LIVERELOAD_PORT
             },
-			compass: {
-				options: {
-					livereload: false
-				},
-				files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
-				tasks: ['compass']
-			},
-			css: {
-				files: [
-					'{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css'
-				]
-			},
+            compass: {
+                options: {
+                    livereload: false
+                },
+                files: ['<%= yeoman.app %>/styles/{,*/}*.{scss,sass}'],
+                tasks: ['compass']
+            },
+            css: {
+                files: [
+                    '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css'
+                ]
+            },
             livereload: {
                 files: [
-					'Gruntfile.js',
-					'<%= yeoman.app %>/app/styles/*.scss',
+                    'Gruntfile.js',
+                    '<%= yeoman.app %>/app/styles/*.scss',
                     '<%= yeoman.app %>/{,*/}*.html',
                     '{.tmp,<%= yeoman.app %>}/scripts/{,*/}*.js',
-                	'{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
+                    '{.tmp,<%= yeoman.app %>}/styles/{,*/}*.css',
                     '<%= yeoman.app %>/media/{,*/}*.{gif,jpeg,jpg,png,svg,webp}'
                 ]
             }
         },
 
         // The actual grunt server settings
-		connect: {
-			options: {
-				port: SERVER_PORT,
-				// change this to '0.0.0.0' to access the server from outside
-				hostname: 'localhost'
-			},
-			livereload: {
-				options: {
-					middleware: function (connect) {
-						return [
-							lrSnippet,
-							mountFolder(connect, '.tmp'),
-							mountFolder(connect, 'bower_components'),
-							mountFolder(connect, yeomanConfig.app)
-						];
-					}
-				}
-			},
-			dist: {
-				options: {
-					middleware: function (connect) {
-						return [
-							mountFolder(connect, yeomanConfig.dist)
-						];
-					}
-				}
-			}
-		},
+        connect: {
+            options: {
+                port: SERVER_PORT,
+                // change this to '0.0.0.0' to access the server from outside
+                hostname: 'localhost'
+            },
+            proxies: [{
+                context: '/api',
+                host: '127.0.0.1',
+                port: 8084,
+                https: false,
+                changeOrigin: false,
+                xforward: false
+            }],
+            livereload: {
+                options: {
+                    middleware: function(connect) {
+                        return [
+                            lrSnippet,
+                            proxySnippet,
+                            mountFolder(connect, '.tmp'),
+                            mountFolder(connect, 'bower_components'),
+                            mountFolder(connect, 'app')
+                        ];
+                        // if (!Array.isArray(options.base)) {
+                        //     options.base = [options.base];
+                        // }
 
-		//Open in a new browser window
-		open: {
-			server: {
-				path: 'http://localhost:<%= connect.options.port %>'
-			}
-		},
+                        // // Setup the proxy
+                        // var middlewares = [require('grunt-connect-proxy/lib/utils').proxyRequest];
+
+                        // // Serve static files.
+                        // options.base.forEach(function(base) {
+                        //     middlewares.push(connect.static(base));
+                        // });
+
+                        // // Make directory browse-able.
+                        // var directory = options.directory || options.base[options.base.length - 1];
+                        // middlewares.push(connect.directory(directory));
+
+                        // return middlewares;
+                    }
+                }
+            },
+            dist: {
+                options: {
+                    middleware: function(connect) {
+                        return [
+                            mountFolder(connect, yeomanConfig.dist)
+                        ];
+                    }
+                }
+            }
+        },
+
+        //Open in a new browser window
+        open: {
+            server: {
+                path: 'http://localhost:<%= connect.options.port %>'
+            }
+        },
 
         useminPrepare: {
             html: '<%= yeoman.app %>/index.html',
@@ -107,16 +136,16 @@ module.exports = function (grunt) {
             }
         },
 
-		htmlmin: {
-			dist: {
-				files: [{
-					expand: true,
-					cwd: '<%= yeoman.app %>',
-					src: '*.html',
-					dest: '<%= yeoman.dist %>'
-				}]
-			}
-		},
+        htmlmin: {
+            dist: {
+                files: [{
+                    expand: true,
+                    cwd: '<%= yeoman.app %>',
+                    src: '*.html',
+                    dest: '<%= yeoman.dist %>'
+                }]
+            }
+        },
 
         imagemin: {
             dist: {
@@ -130,79 +159,73 @@ module.exports = function (grunt) {
         },
 
         cssmin: {
-			dist: {
-				files: {
-					'<%= yeoman.dist %>/styles/main.min.css': ['.tmp/styles/main.css']
-				}
-			}
+            dist: {
+                files: {
+                    '<%= yeoman.dist %>/styles/main.min.css': ['.tmp/styles/main.css']
+                }
+            }
         },
 
-		// Empties folders to start fresh
-		clean: {
-			dist: ['.tmp', '<%= yeoman.dist %>/*'],
-			server: '.tmp'
-		},
+        // Empties folders to start fresh
+        clean: {
+            dist: ['.tmp', '<%= yeoman.dist %>/*'],
+            server: '.tmp'
+        },
 
         // Copies remaining files to places other tasks can use
         copy: {
             dist: {
-                files: [
-                    {
-                        expand: true,
-                        filter: 'isFile',
-                        cwd: '<%= yeoman.app %>/',
-                        dest: '<%= yeoman.dist %>',
-                        src: [
-                            '*.{ico,png,txt}',
-                            '.htaccess'
-                        ]
-					},
-					{
-						expand: true,
-						flatten: true,
-						cwd: 'bower_components/',
-						dest: '<%= yeoman.dist %>/styles/fonts/',
-						src: ['bootstrap-sass-official/assets/fonts/bootstrap/*.*']
+                files: [{
+                    expand: true,
+                    filter: 'isFile',
+                    cwd: '<%= yeoman.app %>/',
+                    dest: '<%= yeoman.dist %>',
+                    src: [
+                        '*.{ico,png,txt}',
+                        '.htaccess'
+                    ]
+                }, {
+                    expand: true,
+                    flatten: true,
+                    cwd: 'bower_components/',
+                    dest: '<%= yeoman.dist %>/styles/fonts/',
+                    src: ['bootstrap-sass-official/assets/fonts/bootstrap/*.*']
 
-					},
-					{
-						expand: true,
-						flatten: true,
-						src: ['.tmp/scripts/modernizr.js'],
-						dest: '<%= yeoman.dist %>/scripts/'
-					}
-                ]
+                }, {
+                    expand: true,
+                    flatten: true,
+                    src: ['.tmp/scripts/modernizr.js'],
+                    dest: '<%= yeoman.dist %>/scripts/'
+                }]
             },
-			server: {
-				files: [
-					{
-						expand: true,
-						flatten: true,
-						cwd: 'bower_components/',
-						dest: '.tmp/styles/fonts/',
-						src: ['bootstrap-sass-official/assets/fonts/bootstrap/*.*', 'font-awesome/fonts/*.*']
-					}
-				]
-			}
+            server: {
+                files: [{
+                    expand: true,
+                    flatten: true,
+                    cwd: 'bower_components/',
+                    dest: '.tmp/styles/fonts/',
+                    src: ['bootstrap-sass-official/assets/fonts/bootstrap/*.*', 'font-awesome/fonts/*.*']
+                }]
+            }
         },
 
-		compass: {
-			options: {
-				sassDir: '<%= yeoman.app %>/styles',
-				cssDir: '.tmp/styles',
-				imagesDir: '<%= yeoman.app %>/images',
-				javascriptsDir: '<%= yeoman.app %>/scripts',
-				fontsDir: '<%= yeoman.app %>/styles/fonts',
-				importPath: 'bower_components',
-				relativeAssets: true
-			},
-			dist: {},
-			server: {
-				options: {
-					debugInfo: true
-				}
-			}
-		},
+        compass: {
+            options: {
+                sassDir: '<%= yeoman.app %>/styles',
+                cssDir: '.tmp/styles',
+                imagesDir: '<%= yeoman.app %>/images',
+                javascriptsDir: '<%= yeoman.app %>/scripts',
+                fontsDir: '<%= yeoman.app %>/styles/fonts',
+                importPath: 'bower_components',
+                relativeAssets: true
+            },
+            dist: {},
+            server: {
+                options: {
+                    debugInfo: true
+                }
+            }
+        },
 
         // Make sure code styles are up to par and there are no obvious mistakes
         jshint: {
@@ -215,15 +238,15 @@ module.exports = function (grunt) {
                 '<%= yeoman.app %>/scripts/{,*/}*.js'
             ]
         },
-		jscs: {
+        jscs: {
 
-			options: {
-				config: '.jscsrc'
-			},
-			files: [
-				'<%= yeoman.app %>/scripts/{,*/}*.js'
-			]
-		},
+            options: {
+                config: '.jscsrc'
+            },
+            files: [
+                '<%= yeoman.app %>/scripts/{,*/}*.js'
+            ]
+        },
 
         // Generates a custom Modernizr build that includes only the tests you
         // reference in your app
@@ -232,43 +255,44 @@ module.exports = function (grunt) {
                 devFile: 'bower_components/modernizr/modernizr.js',
                 outputFile: '.tmp/scripts/modernizr.js',
                 files: {
-					src: [
-						'.tmp/scripts/{,*/}*.js',
-						'.tmp/styles/{,*/}*.css'
-					]
-				},
+                    src: [
+                        '.tmp/scripts/{,*/}*.js',
+                        '.tmp/styles/{,*/}*.css'
+                    ]
+                },
                 uglify: true
             }
         }
     });
 
-	grunt.registerTask('build', [
+    grunt.registerTask('build', [
         'clean:dist',
         'modernizr',
         'compass:dist',
-		'useminPrepare',
-		'htmlmin',
-		'cssmin',
-		'imagemin',
-		'jshint',
-		'concat',
-		'uglify',
-		'usemin',
+        'useminPrepare',
+        'htmlmin',
+        'cssmin',
+        'imagemin',
+        'jshint',
+        'concat',
+        'uglify',
+        'usemin',
         'copy:dist'
     ]);
 
-	grunt.registerTask('serve', [
-		'clean:server',
-		'copy:server',
-		'modernizr',
-		'compass:server',
-		'jshint',
-		'connect:livereload',
-		'open:server',
-		'watch'
-	]);
+    grunt.registerTask('serve', [
+        'clean:server',
+        'copy:server',
+        'modernizr',
+        'compass:server',
+        'jshint',
+        'configureProxies:server',
+        'connect:livereload',
+        'open:server',
+        'watch'
+    ]);
 
-	grunt.registerTask('default', [
+    grunt.registerTask('default', [
         'compass',
         'jshint'
     ]);

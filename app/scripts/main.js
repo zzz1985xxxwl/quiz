@@ -39,7 +39,7 @@
         function addZero(num) {
             num = '' + num;
             if (num.length < 2) {
-                num = '0'+num;
+                num = '0' + num;
             }
             return num;
         }
@@ -52,10 +52,21 @@
                 start = true;
                 setTime();
                 timer = setInterval(setTime, 1000);
+                $.post('/api/quiz', {
+                    name: $name.val()
+                });
             },
             end: function() {
                 clearInterval(timer);
                 $quizTime.text('');
+                var anslist = [];
+                $items.find("textarea").each(function() {
+                    anslist.push($(this).val());
+                })
+                $.post('/api/quiz', {
+                    'name': $name.val(),
+                    'anslist':anslist
+                });
             }
         };
     })();
