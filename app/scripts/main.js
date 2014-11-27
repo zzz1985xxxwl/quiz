@@ -60,9 +60,9 @@
                 clearInterval(timer);
                 $quizTime.text('');
                 var anslist = [];
-                $items.find("textarea").each(function() {
+                $items.find('textarea').each(function() {
                     anslist.push($(this).val());
-                })
+                });
                 $.post('/api/quiz', {
                     'name': $name.val(),
                     'anslist':anslist

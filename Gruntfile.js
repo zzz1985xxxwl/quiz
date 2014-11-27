@@ -83,23 +83,6 @@ module.exports = function(grunt) {
                             mountFolder(connect, 'bower_components'),
                             mountFolder(connect, 'app')
                         ];
-                        // if (!Array.isArray(options.base)) {
-                        //     options.base = [options.base];
-                        // }
-
-                        // // Setup the proxy
-                        // var middlewares = [require('grunt-connect-proxy/lib/utils').proxyRequest];
-
-                        // // Serve static files.
-                        // options.base.forEach(function(base) {
-                        //     middlewares.push(connect.static(base));
-                        // });
-
-                        // // Make directory browse-able.
-                        // var directory = options.directory || options.base[options.base.length - 1];
-                        // middlewares.push(connect.directory(directory));
-
-                        // return middlewares;
                     }
                 }
             },
@@ -181,8 +164,7 @@ module.exports = function(grunt) {
                     cwd: '<%= yeoman.app %>/',
                     dest: '<%= yeoman.dist %>',
                     src: [
-                        '*.{ico,png,txt}',
-                        '.htaccess'
+                        '*.{ico,png,txt}'
                     ]
                 }, {
                     expand: true,
@@ -247,6 +229,17 @@ module.exports = function(grunt) {
                 '<%= yeoman.app %>/scripts/{,*/}*.js'
             ]
         },
+        // Renames files for browser caching purposes
+        filerev: {
+            dist: {
+                src: [
+                    '<%= yeoman.dist %>/scripts/{,*/}*.js',
+                    '<%= yeoman.dist %>/styles/{,*/}*.css',
+                    '<%= yeoman.dist %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}',
+                    '<%= yeoman.dist %>/styles/fonts/*'
+                ]
+            }
+        },
 
         // Generates a custom Modernizr build that includes only the tests you
         // reference in your app
@@ -269,15 +262,19 @@ module.exports = function(grunt) {
         'clean:dist',
         'modernizr',
         'compass:dist',
-        'useminPrepare',
         'htmlmin',
+        'useminPrepare',
+
         'cssmin',
         'imagemin',
         'jshint',
         'concat',
         'uglify',
+
+        'filerev',
         'usemin',
-        'copy:dist'
+
+        'copy:dist',
     ]);
 
     grunt.registerTask('serve', [

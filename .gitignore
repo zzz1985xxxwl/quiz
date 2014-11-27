@@ -1,6 +1,6 @@
 
-node_modules
-dist
+node_modulesdist
+
 .tmp
 
 /node_modules
@@ -13,3 +13,6 @@ dist
 /server/server/bin
 /server/server/obj/Debug
 /server/server/server.csproj.user
+/dist
+/
+/server/server/obj

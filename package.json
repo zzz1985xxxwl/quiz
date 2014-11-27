@@ -17,6 +17,7 @@
     "grunt-contrib-jshint": "^0.10",
     "grunt-contrib-uglify": "^0.6",
     "grunt-contrib-watch": "^0.6",
+    "grunt-filerev": "^2.1.2",
     "grunt-jscs": "^0.8",
     "grunt-modernizr": "^0.5",
     "grunt-open": "^0.2",
