@@ -83,7 +83,6 @@
         if (n > quizLength) {
             quiztimer.end();
         }
-
     });
     hasher.initialized.add(crossroads.parse, crossroads);
     hasher.changed.add(crossroads.parse, crossroads);

@@ -127,6 +127,21 @@ module.exports = function(grunt) {
                     src: '*.html',
                     dest: '<%= yeoman.dist %>'
                 }]
+            },
+            distin: {
+                options: {
+                    collapseWhitespace: true,
+                    conservativeCollapse: true,
+                    collapseBooleanAttributes: true,
+                    removeCommentsFromCDATA: true,
+                    removeOptionalTags: true
+                },
+                files: [{
+                    expand: true,
+                    cwd: '<%= yeoman.dist %>',
+                    src: '*.html',
+                    dest: '<%= yeoman.dist %>'
+                }]
             }
         },
 
@@ -151,7 +166,7 @@ module.exports = function(grunt) {
 
         // Empties folders to start fresh
         clean: {
-            dist: ['.tmp', '<%= yeoman.dist %>/*'],
+            dist: ['.tmp', '<%= yeoman.dist %>/{,*/,**/}*.{png,jpg,jpeg,gif,html,css,js,ttf,woff,svg,eot}'],
             server: '.tmp'
         },
 
@@ -262,7 +277,8 @@ module.exports = function(grunt) {
         'clean:dist',
         'modernizr',
         'compass:dist',
-        'htmlmin',
+        'htmlmin:dist',
+        'copy:dist',
         'useminPrepare',
 
         'cssmin',
@@ -273,8 +289,7 @@ module.exports = function(grunt) {
 
         'filerev',
         'usemin',
-
-        'copy:dist',
+        'htmlmin:distin'
     ]);
 
     grunt.registerTask('serve', [
