@@ -34,113 +34,118 @@
 
     <div class="container m-main">
         <div class="row">
-            <div class="col-md-10">
-                <h1>Transfinder</h1>
-            </div>
-            <div class="col-md-2">
-                <h1 id="quizTime" class="text-right">00:00</h1>
-            </div>
-        </div>
-        <div class="row">
-            <div class="panel panel-default">
-                <div class="panel-heading">Front-end Developer Entry Test</div>
-                <div class="panel-body ">
-                    <div class="quiz-container">
-                        <div class="quiz-wrap" id="quizWrap">
-                            <div id="d0" class="item form-inline">
-                                <div class="text-center">
-                                    <label for="txtName" class="control-label">Name</label>
-                                    <input type="email" class="form-control" id="txtName" placeholder="">
-                                </div>
-                                <div class="text-center">
-                                    <a class="btn btn-primary btn-lg">Start</a>
-                                </div>
-                            </div>
-                            <div id="d1" class="item form-horizontal">
-                                <div>
-                                    <p>1. Write as many as possible Html5 new tag</p>
-                                </div>
-                                <div>
-                                    <textarea class="form-control"></textarea>
-                                </div>
-                                <div class="btn-group btn-group-lg">
-                                    <a class="btn btn-primary">Next</a>
-                                </div>
-                            </div>
-                            <div id="d2" class="item form-horizontal">
-                                <div>
-                                    <p>2. Write as many as possible new css3 style</p>
-                                </div>
-                                <div>
-                                    <textarea class="form-control"></textarea>
-                                </div>
-                                <div class="btn-group btn-group-lg">
-                                    <a class="btn btn-default">Prev</a>
-                                    <a class="btn btn-primary">Next</a>
-                                </div>
-                            </div>
-                            <div id="d3" class="item form-horizontal">
-                                <div>
-                                    3. What this javascript doing?
-                                    <div class="code">
-                                        <span style="color:#5BC0DE">function</span> addMethod(object, name, fn) {
-                                        <br /> &nbsp; &nbsp;<span style="color:#5BC0DE">var</span> old = object[name];
-                                        <br /> &nbsp; &nbsp;object[name] = <span style="color:#5BC0DE">function</span>(){
-                                        <br /> &nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#5BC0DE">if</span> (fn.length == arguments.length)
-                                        <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#5BC0DE">return</span> fn.apply(this, arguments)
-                                        <br /> &nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#5BC0DE">else if</span> (typeof old == &#39;function&#39;)
-                                        <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#5BC0DE">return</span> old.apply(this, arguments);
-                                        <br /> &nbsp; &nbsp;};
-                                        <br /> }
+            <div class="col-md-3 hidden-xs"></div>
+            <div class="col-md-6 col-xs-12">
+                <div class="container-fluid">
+                    <div class="row">
+                        <div class="col-md-10 col-xs-8">
+                            <h1 class="hidden-xs">Transfinder</h1>
+                        </div>
+                        <div class="col-md-2 col-xs-4">
+                            <h1 id="quizTime" class="text-right">00:00</h1>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">Front-end Developer Entry Test</div>
+                            <div class="panel-body ">
+                                <div class="quiz-container">
+                                    <div id="d0" class="item form-inline">
+                                        <div class="text-center">
+                                            <label for="txtName" class="control-label">Name</label>
+                                            <input type="email" class="form-control" id="txtName" placeholder="">
+                                        </div>
+                                        <div class="text-center">
+                                            <a class="btn btn-primary btn-lg">Start</a>
+                                        </div>
                                     </div>
+                                    <div id="d1" class="item form-horizontal">
+                                        <div>
+                                            <p>1. Write as many as possible Html5 new tag</p>
+                                        </div>
+                                        <div>
+                                            <textarea class="form-control"></textarea>
+                                        </div>
+                                        <div class="btn-group btn-group-lg">
+                                            <a class="btn btn-primary">Next</a>
+                                        </div>
+                                    </div>
+                                    <div id="d2" class="item form-horizontal">
+                                        <div>
+                                            <p>2. Write as many as possible new css3 style</p>
+                                        </div>
+                                        <div>
+                                            <textarea class="form-control"></textarea>
+                                        </div>
+                                        <div class="btn-group btn-group-lg">
+                                            <a class="btn btn-default">Prev</a>
+                                            <a class="btn btn-primary">Next</a>
+                                        </div>
+                                    </div>
+                                    <div id="d3" class="item form-horizontal">
+                                        <div>
+                                            3. What this javascript doing?
+                                            <div class="code">
+                                                <span style="color:#5BC0DE">function</span> addMethod(object, name, fn) {
+                                                <br /> &nbsp; &nbsp;<span style="color:#5BC0DE">var</span> old = object[name];
+                                                <br /> &nbsp; &nbsp;object[name] = <span style="color:#5BC0DE">function</span>(){
+                                                <br /> &nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#5BC0DE">if</span> (fn.length == arguments.length)
+                                                <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#5BC0DE">return</span> fn.apply(this, arguments)
+                                                <br /> &nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#5BC0DE">else if</span> (typeof old == &#39;function&#39;)
+                                                <br /> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <span style="color:#5BC0DE">return</span> old.apply(this, arguments);
+                                                <br /> &nbsp; &nbsp;};
+                                                <br /> }
+                                            </div>
 
 
-                                </div>
-                                <div>
-                                    <textarea class="form-control"></textarea>
-                                </div>
-                                <div class="btn-group btn-group-lg">
-                                    <a class="btn btn-default">Prev</a>
-                                    <a class="btn btn-primary">Next</a>
-                                </div>
-                            </div>
-                            <div id="d4" class="item form-horizontal">
-                                <div>
-                                    <p>4. What is a javascript closure?</p>
-                                </div>
-                                <div>
-                                    <textarea class="form-control"></textarea>
-                                </div>
-                                <div class="btn-group btn-group-lg">
-                                    <a class="btn btn-default">Prev</a>
-                                    <a class="btn btn-primary">Next</a>
-                                </div>
-                            </div>
-                            <div id="d5" class="item form-horizontal">
-                                <div>
-                                    <p>5. How to achieve cross domain request in javascript?</p>
-                                </div>
-                                <div>
-                                    <textarea class="form-control"></textarea>
-                                </div>
-                                <div class="btn-group btn-group-lg">
-                                    <a class="btn btn-default">Prev</a>
-                                    <a class="btn btn-primary">Done</a>
-                                </div>
-                            </div>
-                            <div id="d6" class="item">
-                                <div class="text-center">
-                                    <h1>Thank you for your cooperation. <br />
-                                We will notify you in 2 days.
-                            </h1>
+                                        </div>
+                                        <div>
+                                            <textarea class="form-control"></textarea>
+                                        </div>
+                                        <div class="btn-group btn-group-lg">
+                                            <a class="btn btn-default">Prev</a>
+                                            <a class="btn btn-primary">Next</a>
+                                        </div>
+                                    </div>
+                                    <div id="d4" class="item form-horizontal">
+                                        <div>
+                                            <p>4. What is a javascript closure?</p>
+                                        </div>
+                                        <div>
+                                            <textarea class="form-control"></textarea>
+                                        </div>
+                                        <div class="btn-group btn-group-lg">
+                                            <a class="btn btn-default">Prev</a>
+                                            <a class="btn btn-primary">Next</a>
+                                        </div>
+                                    </div>
+                                    <div id="d5" class="item form-horizontal">
+                                        <div>
+                                            <p>5. How to achieve cross domain request in javascript?</p>
+                                        </div>
+                                        <div>
+                                            <textarea class="form-control"></textarea>
+                                        </div>
+                                        <div class="btn-group btn-group-lg">
+                                            <a class="btn btn-default">Prev</a>
+                                            <a class="btn btn-primary">Done</a>
+                                        </div>
+                                    </div>
+                                    <div id="d6" class="item">
+                                        <div class="text-center">
+                                            <h1>Thanks for your cooperation. </h1>
+                                            <h1>We will notify you in 2 days.</h1>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
+            <div class="col-md-3 hidden-xs"></div>
         </div>
+
     </div>
 
     <!-- build:js(bower_components) scripts/vendor.min.js -->

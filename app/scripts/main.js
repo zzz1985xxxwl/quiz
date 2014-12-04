@@ -4,7 +4,6 @@
         quizLength = $items.length - 2,
         $btns = $items.find('.btn'),
         $name = $('#txtName'),
-        $quizWrap = $('#quizWrap'),
         $warning = $('#warning'),
         $quizTime = $('#quizTime');
 
@@ -74,9 +73,28 @@
     init();
     crossroads.addRoute('{n}', function(n) {
         n = +n;
-        $quizWrap.css({
-            'margin-left': -618 * n
-        }).parent().css('height', $('#d' + n).height());
+        if (n >= 1) {
+            var $item = $('#d' + n),
+                $prev = $item.prevAll(),
+                $next = $item.nextAll();
+            $item.css({
+                'left': 0,
+                'opacity':1,
+                'position': 'relative'
+            });
+            $prev.css({
+                'left': '-100%',
+                'opacity':0,
+                'position': 'absolute'
+            });
+            $next.css({
+                'left': '100%',
+                'opacity':0,
+                'position': 'absolute'
+            });
+
+        }
+
         if (n >= 1 && n <= quizLength) {
             quiztimer.start();
         }
