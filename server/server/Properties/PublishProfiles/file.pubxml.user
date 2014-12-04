@@ -94,10 +94,16 @@
       <publishTime>11/27/2014 12:14:11</publishTime>
     </File>
     <File Include="bin/server.dll">
-      <publishTime>11/27/2014 15:59:20</publishTime>
+      <publishTime>12/04/2014 11:21:33</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.dll">
+      <publishTime>07/09/2013 11:04:48</publishTime>
     </File>
     <File Include="bin/System.Net.Http.Formatting.dll">
       <publishTime>11/27/2014 12:14:10</publishTime>
+    </File>
+    <File Include="bin/System.Net.Http.WebRequest.dll">
+      <publishTime>07/09/2013 11:04:48</publishTime>
     </File>
     <File Include="bin/System.Spatial.dll">
       <publishTime>11/27/2014 12:14:11</publishTime>
@@ -152,6 +158,12 @@
     </File>
     <File Include="bin/zh-Hans/System.Net.Http.Formatting.resources.dll">
       <publishTime>11/27/2014 12:14:13</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Net.Http.resources.dll">
+      <publishTime>07/09/2013 11:34:42</publishTime>
+    </File>
+    <File Include="bin/zh-Hans/System.Net.Http.WebRequest.resources.dll">
+      <publishTime>07/09/2013 11:34:40</publishTime>
     </File>
     <File Include="bin/zh-Hans/System.Spatial.resources.dll">
       <publishTime>11/27/2014 12:14:11</publishTime>
@@ -208,7 +220,7 @@
       <publishTime>11/27/2014 12:23:37</publishTime>
     </File>
     <File Include="Web.config">
-      <publishTime>11/27/2014 15:35:56</publishTime>
+      <publishTime>12/04/2014 11:21:33</publishTime>
     </File>
   </ItemGroup>
 </Project>
